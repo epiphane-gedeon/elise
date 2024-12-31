@@ -40,17 +40,23 @@
                 <source src="anniv.mp3" type="audio/mpeg">
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
-            <button onclick="document.getElementById('background-audio').play()">Surprise 🙃</button>
+            <button id="audio-toggle">Surprise 🙃</button>
         </div>
     </div>
 
     <script>
         
-        window.addEventListener('load', function () {
-            const audio = document.getElementById('background-audio');
-            audio.play().catch((error) => {
-                console.log('Autoplay bloqué par le navigateur:', error);
-            });
+        const audio = document.getElementById('background-audio');
+        const button = document.getElementById('audio-toggle');
+
+        button.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                button.textContent = "Couper le son";
+            } else {
+                audio.pause();
+                button.textContent = "Activer le son";
+            }
         });
 
         const track = document.querySelector('.carousel-track');
