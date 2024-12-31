@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page avec Icônes</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <div class="logo-img">
-            <img src="logo.png" alt="Logo" class="logo">
+        <div class="carousel">
+            <div class="carousel-track">
+                <img src="1.jpg" alt="Image 1">
+                <img src="2.jpg" alt="Image 2">
+                <img src="3.jpg" alt="Image 3">
+                <img src="4.jpg" alt="Image 4">
+            </div>
         </div>
         <div class="bienvenu">
             <div class="text">
-                <p>Bienvenue</p>
-                <p>Welcome</p>
-                <p>Bienvenido</p>
+                <p>Bon Aniverssaire Tata</p>
+                <p>Buon compleanno Tata</p>
+                <!-- <p>Bienvenido</p>
                 <p>Willkommen</p>
                 <p>مرحباً</p>
                 <p>欢迎</p>
                 <p>Добро пожаловать</p>
-                <p>Benvenuto</p>
+                <p>Benvenuto</p> -->
             </div>
             <!-- <div class="text">
                 <p>Bienvenue au CISL</p>
@@ -32,10 +36,42 @@
             </div> -->
         </div>
         <div class="icons">
-            <a href="https://www.facebook.com/canadianinternational30" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/cisl_togo?igsh=N3J5ZGoxYnY4aHNj" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@cisl.togo?_t=8pPEcz5F0cQ&_r=1" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+            <audio id="background-audio" loop>
+                <source src="anniv.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+            <button onclick="document.getElementById('background-audio').play()">Surprise 🙃</button>
         </div>
     </div>
+
+    <script>
+        
+        window.addEventListener('load', function () {
+            const audio = document.getElementById('background-audio');
+            audio.play().catch((error) => {
+                console.log('Autoplay bloqué par le navigateur:', error);
+            });
+        });
+
+        const track = document.querySelector('.carousel-track');
+        const images = document.querySelectorAll('.carousel img');
+        const imageWidth = images[0].clientWidth;
+
+        let index = 0;
+
+        function moveCarousel() {
+            index++;
+            if (index >= images.length) {
+                track.style.transition = 'none'; // Disable transition
+                track.style.transform = 'translateX(0)'; // Reset to the start
+                index = 0;
+                setTimeout(() => track.style.transition = 'transform 0.5s ease-in-out', 50);
+            } else {
+                track.style.transform = `translateX(-${index * imageWidth}px)`;
+            }
+        }
+
+        setInterval(moveCarousel, 3000); // Change image every 3 seconds
+    </script>
 </body>
 </html>
